@@ -1,3 +1,8 @@
 data/
 .ipynb_checkpoints/
 *.pyc
+*.csv
+__pycache__
+Test.ipynb
+Untitled.ipynb
+NN_labels.py
