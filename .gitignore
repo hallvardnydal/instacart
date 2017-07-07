@@ -1,4 +1,5 @@
 data/
+features/
 .ipynb_checkpoints/
 *.pyc
 *.csv
@@ -6,3 +7,5 @@ __pycache__
 Test.ipynb
 Untitled.ipynb
 NN_labels.py
+userXproduct_features_2.py
+prediction_new.py

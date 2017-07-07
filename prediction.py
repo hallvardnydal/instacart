@@ -35,7 +35,6 @@ n_train_customers = 10000
 features = [('product_features.csv','product_id'),
             ('user_features.csv','user_id'),
             ('userXproduct_features.csv','user_product_id'),
-            ('userXproduct_features_2.csv','user_product_id'),
             ('order_features.csv','order_id')]
 
 customers = pickle.load(open( os.path.join(feature_dir,"customers.p"), "rb" ) )
