@@ -17,7 +17,7 @@ This repository contains the following files for feature generation:
 
 ### Prediction
 
-The prediction is run using:
+The prediction of market baskets is run using:
 - xgboost_starter.py
 
 
