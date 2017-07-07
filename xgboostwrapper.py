@@ -38,4 +38,4 @@ class XGBoostWrapper(object):
 
     def plot_importance(self):
         plot_importance(self.model)
-        plt.savefig('feature_importance.pdf')
+        plt.savefig('feature_importance.pdf',bbox_inches='tight')

@@ -21,7 +21,6 @@ def build_features(data,features,feature_dir="features"):
 
     try:
         labels = data['labels'].values
-        data = data.drop(['labels'],axis=1)
         return data,labels
     except:
         return data, []
@@ -92,7 +91,7 @@ thresholds = np.linspace(0,0.5,50)
 best_score = 0.
 for t in thresholds:
     X_valid['preds_binary'] = (X_valid['preds']>t).map(int)
-    score = f1_score(X_valid['labels'],X_valid['preds_binary'])
+    score = f1_score(Y_valid,X_valid['preds_binary'])
     if score>best_score:
         best_score = score
         threshold = t

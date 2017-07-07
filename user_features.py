@@ -49,7 +49,12 @@ del usr
 users['user_average_basket'] = (users.user_total_items / users.user_nb_orders).astype(np.float32)
 
 users['user_id'] = users.index
-users = users[['user_id','user_nb_orders','user_average_days_between_orders','user_total_items','user_total_distinct_items','user_average_basket']]
+users = users[['user_id',
+            'user_nb_orders',
+            'user_average_days_between_orders',
+            'user_total_items',
+            'user_total_distinct_items',
+            'user_average_basket']]
 
 print('writing features to csv')
 users.to_csv(os.path.join(feature_dir,'user_features.csv'), index=False)

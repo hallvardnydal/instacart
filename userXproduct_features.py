@@ -45,20 +45,22 @@ userXproduct['user_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.
 userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[1]))
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean()
-userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x[-1])
-userXproduct['UP_order_numbers'] = user_product_group['order_number'].apply(np.array)
-userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(lambda x: np.sum(x>1)/x.size)
+userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x.iloc[-1]) #?
 
 #Compute features dependent on user data
+userXproduct['UP_order_numbers'] = user_product_group['order_number'].apply(np.array)
+
 user_features = pd.read_csv(os.path.join(feature_dir,'user_features.csv'))
 userXproduct = userXproduct.merge(user_features[['user_id','user_nb_orders']],on="user_id",how="left")
 userXproduct['UP_order_rate'] = userXproduct['UP_orders']/userXproduct['user_nb_orders']
 
 userXproduct['UP_orders_since_last_order'] = userXproduct.apply(lambda x: np.min(x['user_nb_orders'] - x['UP_order_numbers']),axis=1)
 userXproduct['UP_order_rate_since_first_order'] = userXproduct.apply(lambda x: x['UP_orders']/(x['user_nb_orders']-np.min(x['UP_order_numbers'])),axis=1)
-userXproduct = userXproduct.drop(['user_nb_orders','UP_order_numbers'],axis=1)
 
-userXproduct = userXproduct.drop(['user_id','product_id'],axis=1)
+# Other
+userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(lambda x: np.sum(x>1)/x.size)
+
+userXproduct = userXproduct.drop(['user_nb_orders','UP_order_numbers','user_id','product_id'],axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir,'userXproduct_features.csv'), index=False)
