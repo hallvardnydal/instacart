@@ -6,6 +6,8 @@ Link to competition [https://www.kaggle.com/c/instacart-market-basket-analysis](
 
 ## Repository
 
+To not kill my RAM and speed up trail/error process i split up the process into feature generation filese hat generates features that are saved as .csv-files. Thes csv-files are later used by a prediction file
+
 ### Feature generation files
 
 This repository contains the following files for feature generation:
